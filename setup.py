@@ -38,7 +38,7 @@ setup(
     install_requires=install_requires,
     entry_points={
         'console_scripts': [
-            'goodjob-pyjobs-router = goodjob_pyjobs.router:main',
+            'goodjob-pyjobs-provider = goodjob_pyjobs.provider:main',
         ],
     },
 )

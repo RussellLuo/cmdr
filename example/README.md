@@ -24,5 +24,5 @@ Usage
 
 4. Run jobs
 
-        $ goodjob-pyjobs-router hello
-        $ goodjob-pyjobs-router goodbye
+        $ goodjob-pyjobs-provider hello
+        $ goodjob-pyjobs-provider goodbye
