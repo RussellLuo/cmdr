@@ -12,7 +12,7 @@ Usage
         $ cd /tmp
         $ git clone https://github.com/RussellLuo/goodjob-pyjobs.git
         $ cd goodjob-pyjobs
-        $ pip setup.py install
+        $ python setup.py install
 
 2. Configure YAML file
 

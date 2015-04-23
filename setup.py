@@ -4,7 +4,7 @@
 import os
 from setuptools import setup, find_packages
 
-description = 'A helper library for integrating Python jobs into `Goodjob` more easily.'
+description = 'A helper provider for integrating Python modules/packages into `Goodjob` more easily.'
 
 install_requires = [
     'click==4.0',
