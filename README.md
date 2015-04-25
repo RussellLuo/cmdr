@@ -7,6 +7,10 @@ A command manager (i.e. Commander) for Python modules and packages.
 Installation
 ------------
 
+Install `Cmdr` with `pip`:
+
+    $ pip install Python-Cmdr
+
 Install development version from `GitHub`:
 
     $ git clone https://github.com/RussellLuo/cmdr.git
@@ -59,7 +63,9 @@ How to execute commands written in Python? There are some typical (or popular) w
 
         $ fab -f /tmp/demo/hello.py main
 
-Although `click` and `fabric` are awesome (and flexible), they are also invasive (your code must depend on them). And all of the methods above may be tedious if you want to **manage a lot of commands which are almost independent (through an uniform interface)**. When you begin to care these problems, `Cmdr` is born for you.
+Although `click` and `fabric` are awesome (and flexible), they are also invasive (your code must depend on them). And all of the methods above may be tedious if you want to **manage a lot of commands which are almost independent, through an uniform interface**.
+
+When you begin to care these problems, `Cmdr` is born for you.
 
 
 Quickstart
@@ -69,17 +75,17 @@ With `Cmdr`, we can just write normal Python modules or packages, and then use t
 
 To make it happen, you must follow the steps below:
 
-1. Set the `COMMANDS_PATH` configuration in a YAML file:
+1. Set the `COMMANDS_PATH` configuration in a YAML file
 
         $ vi /tmp/demo/cmdr.yml
 
         COMMANDS_PATH: /tmp/demo/commands
 
-2. Set the environment variable `CMDR_CONFIG_YAML`:
+2. Set the environment variable `CMDR_CONFIG_YAML`
 
         $ export CMDR_CONFIG_YAML=/tmp/demo/cmdr.yml
 
-3. Create a Python module:
+3. Create a Python module in `COMMANDS_PATH`
 
         # Note here:
         # the module "hello.py" is located in `COMMANDS_PATH`
@@ -95,7 +101,7 @@ To make it happen, you must follow the steps below:
         def main():
             print('hello')
 
-4. Use it as a command:
+4. Use it as a command (identified by its module name)
 
         $ cmdr hello
 
@@ -105,7 +111,7 @@ To make it happen, you must follow the steps below:
 Example
 -------
 
-See [here][3] for example.
+See [here][3] for an example.
 
 
 License

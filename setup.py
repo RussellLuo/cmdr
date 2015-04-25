@@ -23,7 +23,7 @@ def get_version():
 
 
 setup(
-    name='Cmdr',
+    name='Python-Cmdr',
     version=get_version(),
     author='RussellLuo',
     author_email='luopeng.he@gmail.com',
