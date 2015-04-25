@@ -1,28 +1,24 @@
 Example
 =======
 
-A simple example that shows how to use `Goodjob-Pyjobs`.
+A simple example that shows how to use `Cmdr`.
 
 
 Usage
 -----
 
-1. Install Goodjob-Pyjobs
+1. Install `Cmdr`
 
         $ cd /tmp
-        $ git clone https://github.com/RussellLuo/goodjob-pyjobs.git
-        $ cd goodjob-pyjobs
+        $ git clone https://github.com/RussellLuo/cmdr.git
+        $ cd cmdr
         $ python setup.py install
 
-2. Configure YAML file
+2. Set the environment variable
 
-        $ vi example/goodjob_pyjobs.yml
+        $ export CMDR_CONFIG_YAML=/tmp/cmdr/example/cmdr.yml
 
-3. Set environment variable
+3. Run commands
 
-        $ export GOODJOB_PYJOBS_CONFIG_YAML=/tmp/goodjob-pyjobs/example/goodjob_pyjobs.yml
-
-4. Run jobs
-
-        $ goodjob-pyjobs-provider hello
-        $ goodjob-pyjobs-provider goodbye
+        $ cmdr hello
+        $ cmdr goodbye

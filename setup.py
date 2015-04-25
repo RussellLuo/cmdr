@@ -4,7 +4,7 @@
 import os
 from setuptools import setup, find_packages
 
-description = 'A helper provider for integrating Python modules/packages into `Goodjob` more easily.'
+description = 'A command manager (i.e. Commander) for Python modules and packages.'
 
 install_requires = [
     'click==4.0',
@@ -15,7 +15,7 @@ install_requires = [
 
 def get_version():
     basedir = os.path.dirname(__file__)
-    with open(os.path.join(basedir, 'goodjob_pyjobs/__init__.py')) as f:
+    with open(os.path.join(basedir, 'cmdr/__init__.py')) as f:
         locals = {}
         exec(f.read(), locals)
         return locals['__version__']
@@ -23,22 +23,22 @@ def get_version():
 
 
 setup(
-    name='Goodjob-Pyjobs',
+    name='Cmdr',
     version=get_version(),
     author='RussellLuo',
     author_email='luopeng.he@gmail.com',
     maintainer='RussellLuo',
     maintainer_email='luopeng.he@gmail.com',
-    keywords='Goodjob, Python Jobs',
+    keywords='Commander, Command manager, Python',
     description=description,
     license='MIT',
     long_description=description,
     packages=find_packages(exclude=['tests']),
-    url='https://github.com/RussellLuo/goodjob-pyjobs',
+    url='https://github.com/RussellLuo/cmdr',
     install_requires=install_requires,
     entry_points={
         'console_scripts': [
-            'goodjob-pyjobs-provider = goodjob_pyjobs.provider:main',
+            'cmdr = cmdr.commander:main',
         ],
     },
 )

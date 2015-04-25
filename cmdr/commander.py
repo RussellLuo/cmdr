@@ -5,27 +5,27 @@ from __future__ import absolute_import
 
 import click
 
-from goodjob_pyjobs.config import config
+from .config import config
 
 
-# Treat jobs as plugins with the help of `pluginbase` library
+# Treat commands as plugins with the help of `pluginbase` library
 from pluginbase import PluginBase
-plugin_base = PluginBase(package='goodjob_pyjobs.jobs')
-plugin_source = plugin_base.make_plugin_source(searchpath=[config.JOBS_PATH])
+plugin_base = PluginBase(package='cmdr.commands')
+plugin_source = plugin_base.make_plugin_source(searchpath=[config.COMMANDS_PATH])
 
 
-class Job(object):
+class Commander(object):
     def __init__(self, name):
         self.name = name
-        for job_name in plugin_source.list_plugins():
-            if job_name == name:
-                self.job = plugin_source.load_plugin(job_name)
+        for command_name in plugin_source.list_plugins():
+            if command_name == name:
+                self.job = plugin_source.load_plugin(command_name)
                 break
         else:
             raise RuntimeError(
-                'Job `{0}` not found. Please ensure that a Python '
+                'Command `{0}` not found. Please ensure that a Python '
                 'module (or package) named "{0}.py" (or "{0}/__init__.py") '
-                'exists in "{1}"'.format(name, config.JOBS_PATH)
+                'exists in "{1}"'.format(name, config.COMMANDS_PATH)
             )
 
     def execute(self, *args):
@@ -43,11 +43,11 @@ class Job(object):
 
 
 @click.command()
-@click.argument('job_name')
+@click.argument('command_name')
 @click.argument('args', nargs=-1)
-def main(job_name, args):
-    job = Job(job_name)
-    job.execute(*args)
+def main(command_name, args):
+    commander = Commander(command_name)
+    commander.execute(*args)
 
 
 if __name__ == '__main__':
