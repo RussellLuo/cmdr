@@ -15,28 +15,29 @@ plugin_source = plugin_base.make_plugin_source(searchpath=[config.COMMANDS_PATH]
 
 
 class Commander(object):
-    def __init__(self, name):
-        self.name = name
-        for command_name in plugin_source.list_plugins():
-            if command_name == name:
-                self.job = plugin_source.load_plugin(command_name)
-                break
+
+    def get_command(self, command_name):
+        for plugin_name in plugin_source.list_plugins():
+            if plugin_name == command_name:
+                command = plugin_source.load_plugin(plugin_name)
+                return command
         else:
             raise RuntimeError(
                 'Command `{0}` not found. Please ensure that a Python '
                 'module (or package) named "{0}.py" (or "{0}/__init__.py") '
-                'exists in "{1}"'.format(name, config.COMMANDS_PATH)
+                'exists in "{1}"'.format(command_name, config.COMMANDS_PATH)
             )
 
-    def execute(self, *args):
+    def execute_command(self, command_name, *args):
+        command = self.get_command(command_name)
         try:
-            entry_point = getattr(self.job, config.ENTRY_POINT)
+            entry_point = getattr(command, config.ENTRY_POINT)
         except AttributeError:
             raise RuntimeError(
                 'Entry point `{0}` not found. Please ensure that a '
                 'function named "{0}" exists in the Python module '
                 '(or package) "{1}.py" (or "{1}/__init__.py") '.format(
-                    config.ENTRY_POINT, self.name
+                    config.ENTRY_POINT, command_name
                 )
             )
         entry_point(*args)
@@ -46,8 +47,8 @@ class Commander(object):
 @click.argument('command_name')
 @click.argument('args', nargs=-1)
 def main(command_name, args):
-    commander = Commander(command_name)
-    commander.execute(*args)
+    commander = Commander()
+    commander.execute_command(command_name, *args)
 
 
 if __name__ == '__main__':
