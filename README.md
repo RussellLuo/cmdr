@@ -101,11 +101,15 @@ To make it happen, you must follow the steps below:
         def main():
             print('hello')
 
-4. Use it as a command (identified by its module name)
+4. Show available commands (identified by module/package names)
+
+        $ cmdr -l
+
+5. Execute the command `hello`
 
         $ cmdr hello
 
-5. Add more Python modules or packages
+6. Add more Python modules or packages
 
 
 Example
