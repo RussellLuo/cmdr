@@ -28,6 +28,13 @@ class Commander(object):
                 'exists in "{1}"'.format(command_name, config.COMMANDS_PATH)
             )
 
+    def get_command_list(self):
+        command_list = []
+        for plugin_name in plugin_source.list_plugins():
+            command = plugin_source.load_plugin(plugin_name)
+            command_list.append((plugin_name, command.__doc__))
+        return command_list
+
     def execute_command(self, command_name, *args):
         command = self.get_command(command_name)
         try:
@@ -44,11 +51,25 @@ class Commander(object):
 
 
 @click.command()
-@click.argument('command_name')
+@click.option('--list', '-l', is_flag=True, help='Show available commands.')
+@click.argument('command_name', required=False)
 @click.argument('args', nargs=-1)
-def main(command_name, args):
+def main(list, command_name, args):
     commander = Commander()
-    commander.execute_command(command_name, *args)
+    if list:
+        command_list = commander.get_command_list()
+        if not command_list:
+            click.echo('No commands available.')
+        else:
+            click.echo('Available commands:')
+            for command_name, command_doc in command_list:
+                click.echo('    {0: <26}{1}'.format(
+                    command_name, command_doc or ''
+                ))
+    else:
+        if command_name is None:
+            raise click.UsageError('`COMMAND_NAME` argument is required.')
+        commander.execute_command(command_name, *args)
 
 
 if __name__ == '__main__':
